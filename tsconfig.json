@@ -15,6 +15,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["./app/components/*"],
+      "@core/*": ["./app/core/*"],
+      "@layouts/*": ["./app/layouts/*"],
+      "@pages/*": ["./app/pages/*"],
+      "@store/*": ["./app/store/*"],
+      "@models/*": ["./app/models/*"]
+    }
   }
 }

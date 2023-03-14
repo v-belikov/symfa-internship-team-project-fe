@@ -135,7 +135,7 @@ module.exports = {
             '^react',
             '^@?\\w',
             // Internal packages.
-            '^(@|@models|@core|@store|@shared|@modules|@auth|@client|@layout|@notifications)(/.*|$)',
+            '^(@|@models|@core|@store|@components|@pages||@layouts)(/.*|$)',
             // Side effect imports.
             '^\\u0000',
             // Parent imports. Put `..` last.
@@ -193,7 +193,7 @@ module.exports = {
       version: 'detect',
     },
     'import/resolver': {
-      alias: [['@', `${__dirname}/src`]],
+      alias: [['@', `${__dirname}/src/app`]],
     },
   },
   ignorePatterns: ['dist/', 'node_modules/', 'bin/', 'build/'],

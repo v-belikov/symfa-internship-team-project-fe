@@ -1,5 +1,11 @@
 {
   "extends": "./tsconfig.json",
-  "include": [".eslintrc.js", "src/**/*.ts", "src/**/*.tsx", "src/**/*.js"],
+  "include": [
+    "craco.config.js",
+    ".eslintrc.js",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js"
+  ],
   "exclude": ["node_modules", "build"]
 }
