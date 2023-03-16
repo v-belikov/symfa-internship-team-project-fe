@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, Card, Checkbox, Form, Input, Space } from 'antd';
 
-import './styles.scss';
-
 const onFinish = (values: any) => {
   console.log('Success:', values);
 };
