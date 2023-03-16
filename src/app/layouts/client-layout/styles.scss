@@ -1,0 +1,25 @@
+@import '~styles/theme/index.scss';
+
+.client-layout {
+  background-color: $main-layout-background-color;
+
+  &-menu {
+    background-color: $components-background-color;
+    height: 100vh;
+  }
+
+  &-wrapper {
+    margin-left: 20px;
+
+    .header {
+      background-color: $components-background-color;
+      padding: 0;
+      margin: 20px;
+    }
+
+    .content {
+      background-color: $components-background-color;
+      margin: 20px;
+    }
+  }
+}
