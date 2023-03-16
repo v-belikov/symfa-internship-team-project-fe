@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { DateFormat } from './models';
 
-export const format = (date: Date, formatTo: 'D MMMM YYYY' | 'DD/MM/YY-h A') =>
+export const format = (date: Date, formatTo: DateFormat) =>
   dayjs(date, formatTo);
