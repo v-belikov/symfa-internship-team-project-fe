@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Card, Checkbox, Form, Input } from 'antd';
 
+import './styles.scss';
+
 const onFinish = (values: any) => {
   console.log('Success:', values);
 };
@@ -12,12 +14,12 @@ const onFinishFailed = (errorInfo: any) => {
 export const Login: React.FC = () => {
   return (
     <div className="login">
-      <Card title="Login" className="login__card" style={{ width: 600 }}>
+      <Card title="Login" className="login__card">
         <Form
+          className="login__card__form"
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}

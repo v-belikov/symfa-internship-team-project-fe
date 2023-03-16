@@ -4,9 +4,9 @@ import { Space } from 'antd';
 
 import './styles.scss';
 
-export const LoginLayout: React.FC = () => {
+export const AuthLayout: React.FC = () => {
   return (
-    <div className="login-layout">
+    <div className="auth-layout">
       <Space direction="vertical" size={16}>
         <Outlet />
       </Space>
