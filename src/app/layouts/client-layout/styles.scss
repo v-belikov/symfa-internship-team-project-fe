@@ -1,10 +1,9 @@
-@import '~styles/theme/index.scss';
+@import 'src/styles/theme/index.scss';
 
 .client-layout {
   background-color: $main-layout-background-color;
 
   &-menu {
-    background-color: $components-background-color;
     height: 100vh;
   }
 
@@ -12,14 +11,14 @@
     margin-left: 20px;
 
     .header {
-      background-color: $components-background-color;
       padding: 0;
       margin: 20px;
+      background-color: $components-background-color;
     }
 
     .content {
-      background-color: $components-background-color;
       margin: 20px;
+      background-color: $components-background-color;
     }
   }
 }

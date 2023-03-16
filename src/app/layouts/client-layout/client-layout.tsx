@@ -12,7 +12,9 @@ export const ClientLayout: React.FC = () => {
     <StyleProvider hashPriority="high">
       <Layout className="client-layout">
         <Sider>
-          <Menu className="client-layout-menu" />
+          <Menu className="client-layout-menu">
+            <Outlet />
+          </Menu>
         </Sider>
 
         <Layout className="client-layout-wrapper">
