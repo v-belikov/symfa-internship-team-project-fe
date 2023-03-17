@@ -1,0 +1,18 @@
+.dashboard-card {
+  text-align: center;
+  width: 167px;
+  height: 191px;
+  background-color: #e7e6fb;
+  border-radius: 12px;
+
+  &__title {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__count {
+    font-weight: 600;
+    font-size: 20px;
+  }
+}

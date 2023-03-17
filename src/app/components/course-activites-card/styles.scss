@@ -1,0 +1,74 @@
+.course-activites-card {
+  width: 290px;
+  height: 342px;
+  background: #ffffff;
+  border-radius: 15px;
+
+  &__title {
+    font-size: 18px;
+    margin-top: -40px;
+  }
+
+  &__progress {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__progress,
+    &__in-progress {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: center;
+
+      &__text {
+        font-weight: 400;
+        font-size: 14px;
+        display: flex;
+        flex-direction: row;
+
+        &::before {
+          content: '';
+          width: 20px;
+          height: 20px;
+          background-color: #5b68ff;
+          border-radius: 50%;
+          display: block;
+          margin-right: 10px;
+        }
+      }
+    }
+
+    &__in-progress {
+      &__text {
+        &::before {
+          background-color: #cdd3ff;
+        }
+      }
+    }
+  }
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-progress
+  .ant-progress-inner:not(.ant-progress-circle-gradient)
+  .ant-progress-circle-path {
+  stroke: #5b68ff;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-progress
+  .ant-progress-circle-trail {
+  stroke: #cdd3ff;
+}
+
+.ant-card-body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
