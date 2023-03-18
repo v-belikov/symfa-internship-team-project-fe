@@ -1,0 +1,18 @@
+.education-btn-block {
+  width: 250px;
+
+  &:where(.css-dev-only-do-not-override-ph9edi).ant-switch.ant-switch-checked {
+    background: #5b68ff;
+  }
+
+  &:where(.css-dev-only-do-not-override-ph9edi).ant-menu-dark
+    .ant-menu-item-selected {
+    background-color: #5b68ff;
+  }
+
+  &:where(.css-dev-only-do-not-override-ph9edi).ant-menu-light
+    .ant-menu-item-selected {
+    background-color: #5b68ff;
+    color: white;
+  }
+}

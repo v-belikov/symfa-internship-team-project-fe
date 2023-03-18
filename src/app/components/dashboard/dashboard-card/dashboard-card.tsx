@@ -1,6 +1,7 @@
+/* eslint-disable no-restricted-imports */
 import React from 'react';
 import { Card } from 'antd';
-import students_img from '../../../assets/images/cards/total_students.png';
+import students_img from '../../../../assets/images/cards/total_students.png';
 
 import './styles.scss';
 

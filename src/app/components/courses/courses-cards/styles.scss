@@ -1,13 +1,6 @@
-.card {
+.courses-card {
   width: 300px;
   border-radius: 15px;
-
-  & .ant-card-body {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap: 10px;
-  }
 
   &__header {
     display: flex;
@@ -71,5 +64,12 @@
         }
       }
     }
+  }
+
+  & .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
   }
 }

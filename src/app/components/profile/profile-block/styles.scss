@@ -1,0 +1,92 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 350px;
+  padding: 10px 55px 10px 55px;
+
+  &__title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    &__name {
+      font-size: 17.3333px;
+      line-height: 21px;
+    }
+
+    &__students-count {
+      font-weight: 400;
+      font-size: 13.0861px;
+      line-height: 16px;
+      color: #9da6ba;
+    }
+
+    &__contact-block {
+      display: flex;
+      gap: 25px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    &__about-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &__title {
+        font-size: 14px;
+        line-height: 17px;
+      }
+
+      &__description {
+        font-weight: 400;
+        font-size: 11.125px;
+        line-height: 13px;
+      }
+    }
+
+    &__age-block,
+    &__date-block {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &__age,
+      &__gender,
+      &__date,
+      &__address {
+        display: flex;
+        flex-direction: column;
+
+        &__title {
+          font-size: 14px;
+          line-height: 17px;
+        }
+
+        &__main {
+          font-weight: 400;
+          font-size: 11.125px;
+          line-height: 13px;
+          color: #9da6ba;
+        }
+      }
+    }
+  }
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 35px;
+
+    &__title {
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+}
