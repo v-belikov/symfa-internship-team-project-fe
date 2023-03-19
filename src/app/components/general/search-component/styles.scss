@@ -1,3 +1,5 @@
+@import 'src/styles/theme/index.scss';
+
 .search-component {
   width: 238px;
 
@@ -6,8 +8,8 @@
     top: 0;
     width: 46px;
     left: -40px;
-    color: #fff;
-    background-color: #5b68ff;
+    color: $components-white;
+    background-color: $components-courses-process-purple;
     z-index: 1;
   }
 }
@@ -16,7 +18,7 @@
   > .ant-input-group
   > .ant-input-group-addon:last-child
   .ant-input-search-button:not(.ant-btn-primary) {
-  color: #fff;
+  color: $components-white;
 }
 
 .ant-input-search

@@ -1,7 +1,9 @@
+@import 'src/styles/theme/index.scss';
+
 .course-activites-card {
   width: 290px;
   height: 342px;
-  background: #ffffff;
+  background: $components-white;
   border-radius: 15px;
 
   &__title {
@@ -36,7 +38,7 @@
           content: '';
           width: 20px;
           height: 20px;
-          background-color: #5b68ff;
+          background-color: $components-courses-process-purple;
           border-radius: 50%;
           display: block;
           margin-right: 10px;
@@ -47,7 +49,7 @@
     &__in-progress {
       &__text {
         &::before {
-          background-color: #cdd3ff;
+          background-color: $components-courses-in-process-purple;
         }
       }
     }
@@ -64,13 +66,13 @@
       :where(.css-dev-only-do-not-override-ph9edi).ant-progress
       .ant-progress-inner:not(.ant-progress-circle-gradient)
       .ant-progress-circle-path {
-      stroke: #5b68ff;
+      stroke: $components-courses-process-purple;
     }
 
     &
       :where(.css-dev-only-do-not-override-ph9edi).ant-progress
       .ant-progress-circle-trail {
-      stroke: #cdd3ff;
+      stroke: $components-courses-in-process-purple;
     }
   }
 }
