@@ -1,28 +1,28 @@
 .database-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px;
 
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    line-height: 29px;
+
+    &__btn-block {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+  }
+
   &__btn-block {
-    &
-      :where(
-        .css-dev-only-do-not-override-ph9edi
-      ).ant-radio-button-wrapper:first-child {
-      border: none;
-    }
-    &
-      :where(
-        .css-dev-only-do-not-override-ph9edi
-      ).ant-radio-button-wrapper:last-child {
-      border: none;
-    }
-    &
-      :where(
-        .css-dev-only-do-not-override-ph9edi
-      ).ant-radio-button-wrapper-checked:not(
-        .ant-radio-button-wrapper-disabled
-      )::before {
-      background-color: transparent;
-      border: none;
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   &__list {
@@ -58,7 +58,6 @@
         font-weight: 400;
         font-size: 12px;
         line-height: 15px;
-        // padding-left: 10px;
         padding-right: 20px;
       }
     }

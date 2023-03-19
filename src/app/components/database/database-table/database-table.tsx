@@ -1,7 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { UserOutlined } from '@ant-design/icons';
-import { Avatar, List, Radio } from 'antd';
+import {
+  EllipsisOutlined,
+  FilterOutlined,
+  OrderedListOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import { Avatar, Button, List, Radio, Tooltip } from 'antd';
 
 import './styles.scss';
 
@@ -35,10 +40,27 @@ const data = [
 export const DatabaseTable: React.FC = () => {
   return (
     <div className="database-table">
-      <Radio.Group className="database-table__btn-block">
-        <Radio.Button value="student">Student</Radio.Button>
-        <Radio.Button value="teacher">Teacher</Radio.Button>
-      </Radio.Group>
+      <div className="database-table__header">
+        <div className="database-table__header__title">Database</div>
+        <div className="database-table__header__btn-block">
+          <Button>
+            Sort <OrderedListOutlined />
+          </Button>
+          <Button>
+            Filter <FilterOutlined />
+          </Button>
+        </div>
+      </div>
+      <div className="database-table__btn-block">
+        <Radio.Group className="database-table__btn-block__radio">
+          <Radio.Button value="student">Student</Radio.Button>
+          <Radio.Button value="teacher">Teacher</Radio.Button>
+        </Radio.Group>
+        <Tooltip className="database-table__btn-block__right" title="search">
+          <Button shape="circle" icon={<EllipsisOutlined />} />
+        </Tooltip>
+      </div>
+
       <div className="database-table__title">
         <p className="database-table__title__item">Name</p>
         <p className="database-table__title__item__id">ID</p>

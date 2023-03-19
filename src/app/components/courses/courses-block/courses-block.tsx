@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
-import { MenuOutlined, TableOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, MenuOutlined } from '@ant-design/icons';
 import { Col, Radio, Row } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { CoursesCard } from '../courses-cards';
@@ -24,7 +24,7 @@ export const CoursesBlock: React.FC = () => {
           <MenuOutlined />
         </Radio.Button>
         <Radio.Button value="large">
-          <TableOutlined />
+          <AppstoreOutlined />
         </Radio.Button>
       </Radio.Group>
 
