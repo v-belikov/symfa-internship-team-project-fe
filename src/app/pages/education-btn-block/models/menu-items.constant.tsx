@@ -20,7 +20,7 @@ const getItem = (
   } as MenuItem;
 };
 
-export const items: MenuItem[] = [
+export const MENU_ITEMS: MenuItem[] = [
   getItem('Dashboard', '1', <HomeOutlined />),
   getItem('Courses', '2', <ReadOutlined />),
   getItem('Database', '3', <FileOutlined />),

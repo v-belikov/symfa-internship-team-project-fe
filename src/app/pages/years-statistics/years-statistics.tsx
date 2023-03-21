@@ -1,7 +1,7 @@
 import React from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, MenuProps, message, Progress, Space } from 'antd';
-import { items } from './models';
+import { YEARS_OPTIONS } from './models';
 
 import './styles.scss';
 
@@ -11,7 +11,7 @@ const handleMenuClick: MenuProps['onClick'] = e => {
 };
 
 const menuProps = {
-  items,
+  YEARS_OPTIONS,
   onClick: handleMenuClick,
 };
 

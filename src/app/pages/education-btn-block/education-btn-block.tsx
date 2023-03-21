@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { MenuProps, MenuTheme } from 'antd';
 import { Menu, Switch } from 'antd';
-import { items } from './models';
+import { MENU_ITEMS } from './models';
 
 import './styles.scss';
 
@@ -34,7 +34,7 @@ export const EducationBtnBlock: React.FC = () => {
         defaultOpenKeys={['sub1']}
         selectedKeys={[current]}
         mode="inline"
-        items={items}
+        items={MENU_ITEMS}
       />
     </>
   );
