@@ -9,7 +9,7 @@ const onSearch = (value: string) => console.log(value);
 
 export const Search: React.FC = () => {
   return (
-    <Space className="search-component" direction="vertical">
+    <Space className="search" direction="vertical">
       <AntSearch
         placeholder="Search"
         allowClear

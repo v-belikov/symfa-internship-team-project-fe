@@ -1,33 +1,9 @@
 import React, { useState } from 'react';
-import { FileOutlined, HomeOutlined, ReadOutlined } from '@ant-design/icons';
 import type { MenuProps, MenuTheme } from 'antd';
 import { Menu, Switch } from 'antd';
+import { items } from './models';
 
 import './styles.scss';
-
-type MenuItem = Required<MenuProps>['items'][number];
-
-function getItem(
-  label: React.ReactNode,
-  key?: React.Key | null,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: 'group',
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  } as MenuItem;
-}
-
-const items: MenuItem[] = [
-  getItem('Dashboard', '1', <HomeOutlined />),
-  getItem('Courses', '2', <ReadOutlined />),
-  getItem('Database', '3', <FileOutlined />),
-];
 
 export const EducationBtnBlock: React.FC = () => {
   const [theme, setTheme] = useState<MenuTheme>('dark');
@@ -45,15 +21,14 @@ export const EducationBtnBlock: React.FC = () => {
   return (
     <>
       <Switch
+        className="education-btn-block"
         checked={theme === 'dark'}
         onChange={changeTheme}
         checkedChildren="Dark"
         unCheckedChildren="Light"
       />
-      <br />
-      <br />
       <Menu
-        className="education-btn-block"
+        className="education-btn-block__menu"
         theme={theme}
         onClick={onClick}
         defaultOpenKeys={['sub1']}

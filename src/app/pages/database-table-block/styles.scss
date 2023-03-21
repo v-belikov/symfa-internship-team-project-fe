@@ -1,0 +1,27 @@
+.database-table-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    line-height: 29px;
+
+    &__btn-block {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+  }
+
+  &__btn-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

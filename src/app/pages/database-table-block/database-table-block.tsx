@@ -3,47 +3,14 @@ import {
   EllipsisOutlined,
   FilterOutlined,
   OrderedListOutlined,
-  UserOutlined,
 } from '@ant-design/icons';
 import { Button, Radio, Tooltip } from 'antd';
-import { InformTable, InformTableType } from '@components/ui-kit';
+import { InformTable } from '@components/ui-kit';
+import { MOCK_DATA } from './models';
 
 import './styles.scss';
 
 export const DatabaseTableBlock: React.FC = () => {
-  const MOCK_DATA: InformTableType[] = [
-    {
-      key: '1',
-      id: '1',
-      photo: <UserOutlined />,
-      name: 'John Brown',
-      age: 32,
-      class: 'Science 4',
-      gender: 'Male',
-      email: 'kkhoi@gmail.com',
-    },
-    {
-      key: '2',
-      id: '2',
-      photo: <UserOutlined />,
-      name: 'Jim Green',
-      age: 42,
-      class: 'Science 4',
-      gender: 'Male',
-      email: 'kkhoi@gmail.com',
-    },
-    {
-      key: '3',
-      id: '3',
-      photo: <UserOutlined />,
-      name: 'Joe Black',
-      age: 32,
-      class: 'Science 4',
-      gender: 'Male',
-      email: 'kkhoi@gmail.com',
-    },
-  ];
-
   return (
     <div className="database-table-block">
       <div className="database-table-block__header">

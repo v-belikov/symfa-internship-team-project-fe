@@ -1,11 +1,9 @@
 import React from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, MenuProps, message, Progress, Space } from 'antd';
-import { Years } from '@models/year-options.constant';
+import { items } from './models';
 
 import './styles.scss';
-
-const items: MenuProps['items'] = [...Years];
 
 const handleMenuClick: MenuProps['onClick'] = e => {
   message.info('Click on menu item.');

@@ -1,4 +1,6 @@
-export const Years = [
+import { MenuProps } from 'antd';
+
+export const items: MenuProps['items'] = [
   {
     label: '2020',
     key: '1',
