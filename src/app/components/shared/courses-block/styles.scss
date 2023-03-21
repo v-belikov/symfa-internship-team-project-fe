@@ -1,0 +1,29 @@
+@import 'src/styles/theme/index.scss';
+
+.courses {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+
+  &__cards-block {
+    display: flex;
+    row-gap: 20px;
+  }
+
+  &__btn-block {
+    & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+      color: $components-white;
+      background: $components-courses-btn-green-btn;
+      border-color: $components-courses-btn-green-btn;
+    }
+
+    & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+      background-color: $components-courses-btn-green-btn;
+    }
+
+    & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper {
+      color: $components-courses-btn-gray-btn;
+    }
+  }
+}
