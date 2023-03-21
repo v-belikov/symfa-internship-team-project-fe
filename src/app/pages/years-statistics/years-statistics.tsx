@@ -1,7 +1,7 @@
 import React from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, MenuProps, message, Progress, Space } from 'antd';
-import { YEARS_OPTIONS } from './models';
+import { MOCK_DATA, YEARS_OPTIONS } from './models';
 
 import './styles.scss';
 
@@ -11,18 +11,11 @@ const handleMenuClick: MenuProps['onClick'] = e => {
 };
 
 const menuProps = {
-  YEARS_OPTIONS,
+  items: YEARS_OPTIONS,
   onClick: handleMenuClick,
 };
 
 export const YearsStatistics: React.FC = () => {
-  const MOCK_DATA: any[] = [
-    { key: 1, year: 2020, percent: 20 },
-    { key: 2, year: 2021, percent: 80 },
-    { key: 3, year: 2022, percent: 40 },
-    { key: 4, year: 2023, percent: 90 },
-  ];
-
   return (
     <div className="years-statistics">
       <div className="years-statistics__header">
