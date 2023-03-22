@@ -1,8 +1,8 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import { Content, Header } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
+import { CoursesBlock } from '@pages/courses-block';
 
 import './styles.scss';
 
@@ -17,7 +17,7 @@ export const ClientLayout: React.FC = () => {
         <Header className="header" />
         <Layout className="content">
           <Content>
-            <Outlet />
+            <CoursesBlock />
           </Content>
         </Layout>
       </Layout>

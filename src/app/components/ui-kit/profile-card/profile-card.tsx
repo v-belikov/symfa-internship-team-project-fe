@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button, Card, Progress } from 'antd';
+import { Button, Card, Progress } from 'antd';
 import mini_book from 'assets/images/cards/mini-book.svg';
 import mini_watch from 'assets/images/cards/mini-watch.svg';
 
@@ -25,7 +25,7 @@ export const ProfileCard: React.FC<any> = ({
 
       <div className="profile-card__title">{subject}</div>
       <div className="profile-card__avatar-block">
-        <Avatar className="profile-card__avatar-block__img" icon={avatar} />
+        <img className="profile-card__header__img" src={avatar} alt="icon" />
         <div className="profile-card__avatar-block__name">{name}</div>
       </div>
 

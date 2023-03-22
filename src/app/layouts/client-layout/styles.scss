@@ -8,8 +8,6 @@
   }
 
   &-wrapper {
-    margin-left: 20px;
-
     .header {
       padding: 0;
       margin: 20px;
@@ -18,7 +16,6 @@
 
     .content {
       margin: 20px;
-      background-color: $components-background-color;
     }
   }
 }

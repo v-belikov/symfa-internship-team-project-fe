@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { AppstoreOutlined, MenuOutlined } from '@ant-design/icons';
-import { Radio, Row, Spin } from 'antd';
+import { Col, Radio, Row, Spin } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
+import { ProfileCard } from '@components/ui-kit';
+import { config } from '@core/config';
 import { useGetCoursesQuery } from '@store/courses';
+import { ICourse, ILesson } from './models';
 
 import './styles.scss';
 
@@ -14,27 +17,17 @@ export const CoursesBlock: React.FC<any> = () => {
     setComponentSize(e.target.value);
   }
 
-  // {MOCK_DATA.map(item => {
-  //   return (
-  //     <Col key={item.id} span={6}>
-  //       <ProfileCard
-  //         name={item.name}
-  //         avatar={item.avatar}
-  //         subject={item.subject}
-  //         icon={item.icon}
-  //         lesson={item.lesson}
-  //         hour={item.hour}
-  //         progress={item.progress}
-  //       />
-  //     </Col>
-  //   );
-  // })}
+  const hoursCalculation = (lessons: Array<ILesson>) => {
+    return lessons.reduce((acc: number, cur: ILesson) => {
+      const hours = acc + cur.duration;
+
+      return hours;
+    }, 0);
+  };
 
   if (isLoading) {
     return <Spin tip="Loading" size="large" />;
   }
-
-  console.log(data);
 
   return (
     <div className="courses">
@@ -44,15 +37,29 @@ export const CoursesBlock: React.FC<any> = () => {
         onChange={e => onHandleChange(e)}
       >
         <Radio.Button value="small">
-          <MenuOutlined />
+          <AppstoreOutlined />
         </Radio.Button>
         <Radio.Button value="large">
-          <AppstoreOutlined />
+          <MenuOutlined />
         </Radio.Button>
       </Radio.Group>
 
       <Row gutter={16} className="courses__cards-block">
-        data
+        {data.map((item: ICourse) => {
+          return (
+            <Col key={item.id} span={6}>
+              <ProfileCard
+                name={`${item.teacher.name} ${item.teacher.surname}`}
+                avatar={`${config.API_URL}/${item.teacher.avatar.avatarPath}`}
+                subject={item.title}
+                icon={`${config.API_URL}/${item.logo.logoPath}`}
+                lesson={item.lessons.length}
+                hour={hoursCalculation(item.lessons)}
+                progress={99}
+              />
+            </Col>
+          );
+        })}
       </Row>
     </div>
   );
