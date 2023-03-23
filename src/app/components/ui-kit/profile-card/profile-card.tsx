@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Progress } from 'antd';
+import { Button, Card, Popover, Progress } from 'antd';
 import mini_book from 'assets/images/cards/mini-book.svg';
 import mini_watch from 'assets/images/cards/mini-watch.svg';
 
@@ -13,14 +13,22 @@ export const ProfileCard: React.FC<any> = ({
   lesson,
   hour,
   progress,
+  content,
 }) => {
   return (
     <Card className="profile-card">
       <div className="profile-card__header">
         <img className="profile-card__header__img" src={icon} alt="icon" />
-        <Button className="profile-card__header__btn" type="link">
-          ...
-        </Button>
+        <Popover
+          title="Lesson(s):"
+          trigger="click"
+          placement="bottom"
+          content={content}
+        >
+          <Button className="profile-card__header__btn" type="link">
+            ...
+          </Button>
+        </Popover>
       </div>
 
       <div className="profile-card__title">{subject}</div>
