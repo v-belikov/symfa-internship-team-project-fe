@@ -7,14 +7,9 @@ import { DatabaseTableBlock } from '@pages/database-table-block';
 import { Login } from '@pages/login';
 import { Registration } from '@pages/registration';
 import { UserEdit } from '@pages/user-edit';
-import { AuthLayout, MainLayout } from './app/layouts';
+import { AuthLayout } from './app/layouts';
 
 export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <MainLayout />,
-    children: [],
-  },
   {
     path: '/client',
     element: <ClientLayout />,

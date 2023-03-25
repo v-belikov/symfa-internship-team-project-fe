@@ -1,8 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Checkbox, Form, Input } from 'antd';
 import { Loader } from '@components/ui-kit';
 import { useLoginUserMutation } from '@store/users';
+import { setUser } from '@store/users/models/auth-slice';
+import { useAppDispatch } from '../../core/hooks/use-app-dispatch';
 
 import './styles.scss';
 
@@ -32,18 +34,27 @@ export const Login: React.FC = () => {
     [],
   );
   const redirect = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const [loginUser, { isLoading }] = useLoginUserMutation();
+  const [loginUser, { data, isLoading, isSuccess }] = useLoginUserMutation();
 
   const loginHandler = async () => {
     if (email && password) {
       await loginUser({ email, password });
-      console.log(`login successful: ${email} ${password}`);
-      redirect('/client');
+      console.log(`login : ${email} ${password}`);
     } else {
       alert('login of password is empty');
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setUser(data.token));
+      redirect('/client');
+      console.log('successful login');
+      console.log(`token${data.token}`);
+    }
+  }, [isSuccess]);
 
   return (
     <>
