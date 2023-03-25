@@ -30,6 +30,33 @@ export const authApi = createApi({
         };
       },
     }),
+    loginUser: builder.mutation({
+      query(data) {
+        console.log('login', { data });
+
+        return {
+          url: 'auth/user/login',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
+    getCurrentUser: builder.query({
+      query: () => {
+        return {
+          url: `user`,
+          method: 'GET',
+        };
+      },
+    }),
+    getAllUsers: builder.query({
+      query: () => {
+        return {
+          url: `auth/users`,
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
@@ -37,4 +64,7 @@ export const {
   useCreateUserMutation,
   useUpdateUserMutation,
   useGetAvatarsQuery,
+  useLoginUserMutation,
+  useGetCurrentUserQuery,
+  useGetAllUsersQuery,
 } = authApi;
