@@ -6,7 +6,7 @@ import { DashboardBlock } from '@pages/dashboard-block';
 import { DatabaseTableBlock } from '@pages/database-table-block';
 import { Login } from '@pages/login';
 import { Registration } from '@pages/registration';
-import { UserEdit } from '@pages/user-edit';
+import { UpdateUser } from '@pages/update-user';
 import { AuthLayout, MainLayout } from './app/layouts';
 
 export const router = createBrowserRouter([
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       { index: true, element: <Login /> },
-      { path: 'useredit', element: <UserEdit /> },
+      { path: 'update', element: <UpdateUser /> },
       { path: 'register', element: <Registration /> },
     ],
   },
