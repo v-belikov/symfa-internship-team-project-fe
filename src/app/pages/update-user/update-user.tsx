@@ -3,7 +3,7 @@ import { Avatar, Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import { config } from '@core/config';
 import { useGetAvatarsQuery, useUpdateUserMutation } from '@store/users';
 
-export const UserEdit: React.FC = () => {
+export const UpdateUser: React.FC = () => {
   const [updateUser] = useUpdateUserMutation();
 
   const [form] = Form.useForm();

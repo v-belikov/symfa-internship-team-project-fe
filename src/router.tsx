@@ -1,13 +1,13 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import { AuthLayout } from '@layouts/auth-layout';
 import { ClientLayout } from '@layouts/client-layout';
 import { CoursesBlock } from '@pages/courses-block';
 import { DashboardBlock } from '@pages/dashboard-block';
 import { DatabaseTableBlock } from '@pages/database-table-block';
 import { Login } from '@pages/login';
 import { Registration } from '@pages/registration';
-import { UserEdit } from '@pages/user-edit';
-import { AuthLayout } from './app/layouts';
+import { UpdateUser } from '@pages/update-user';
 
 export const router = createBrowserRouter([
   {
@@ -24,16 +24,8 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       { index: true, element: <Login /> },
-      { path: 'useredit', element: <UserEdit /> },
+      { path: 'update', element: <UpdateUser /> },
       { path: 'register', element: <Registration /> },
-    ],
-  },
-  {
-    path: '/auth',
-    element: <AuthLayout />,
-    children: [
-      { index: true, element: <Login /> },
-      { path: 'login', element: <Login /> },
     ],
   },
 ]);
