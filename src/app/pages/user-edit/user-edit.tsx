@@ -1,25 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  Avatar,
-  Button,
-  Card,
-  DatePicker,
-  Form,
-  Input,
-  Select,
-  Space,
-} from 'antd';
+import { Avatar, Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import { config } from '@core/config';
-import { useCreateUserMutation, useGetAvatarsQuery } from '@store/users';
+import { useGetAvatarsQuery, useUpdateUserMutation } from '@store/users';
 
-import './styles.scss';
+export const UserEdit: React.FC = () => {
+  const [updateUser] = useUpdateUserMutation();
 
-export const Registration: React.FC = () => {
-  const [createdUser] = useCreateUserMutation();
   const [form] = Form.useForm();
-
-  const navigate = useNavigate();
 
   const onFinish = async (fieldsValue: any) => {
     const values = {
@@ -40,25 +27,24 @@ export const Registration: React.FC = () => {
 
     console.log('finished:', values);
 
-    await createdUser(values);
-
-    navigate('/auth');
+    await updateUser(values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
+  const { data: avatars } = useGetAvatarsQuery({});
+
   const onAvatarClick = (avatar: any) => {
     form.setFieldsValue({ avatarId: avatar });
   };
 
-  const { data: avatars } = useGetAvatarsQuery({});
-
   return (
-    <div className="registration">
+    <div>
+      <Button>Back</Button>
       <Space direction="vertical" size={16}>
-        <Card title="Registration" className="registration__card">
+        <Card title="Profile editing" className="registration__card">
           <Form
             form={form}
             className="registration__card__form"
@@ -69,28 +55,20 @@ export const Registration: React.FC = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-            <Form.Item
-              label="Name"
-              name="name"
-              rules={[{ required: true, message: 'Please input your name!' }]}
-            >
+            <Form.Item label="Name" name="name" rules={[{ required: false }]}>
               <Input />
             </Form.Item>
             <Form.Item
               label="Surname"
               name="surname"
-              rules={[
-                { required: true, message: 'Please input your surname!' },
-              ]}
+              rules={[{ required: false }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
               label="Avatar"
               name="avatarId"
-              rules={[
-                { required: true, message: 'Please choose your avatar!' },
-              ]}
+              rules={[{ required: false }]}
             >
               <Space wrap size={12}>
                 {avatars?.map((avatar: any) => {
@@ -111,87 +89,40 @@ export const Registration: React.FC = () => {
                 })}
               </Space>
             </Form.Item>
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[{ required: true, message: 'Please input your email!' }]}
-            >
+            <Form.Item label="Email" name="email" rules={[{ required: false }]}>
               <Input />
             </Form.Item>
             <Form.Item
               label="Phone number"
               name="phoneNumber"
-              rules={[
-                { required: true, message: 'Please input your phoneNumber!' },
-              ]}
+              rules={[{ required: false }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
               label="Description"
               name="description"
-              rules={[
-                { required: true, message: 'Please input your description!' },
-              ]}
+              rules={[{ required: false }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
               name="dateOfBirth"
               label="Date of birth"
-              rules={[
-                { required: true, message: 'Please input your date of birth!' },
-              ]}
+              rules={[{ required: false }]}
             >
               <DatePicker />
             </Form.Item>
             <Form.Item
               label="Address"
               name="address"
-              rules={[
-                { required: true, message: 'Please input your address!' },
-              ]}
+              rules={[{ required: false }]}
             >
               <Input />
             </Form.Item>
-            <Form.Item
-              label="Gender"
-              name="gender"
-              rules={[{ required: true, message: 'Please input your gender!' }]}
-            >
-              <Select
-                style={{ width: 120 }}
-                options={[
-                  { value: 'female', label: 'Female' },
-                  { value: 'male', label: 'Male' },
-                ]}
-              />
-            </Form.Item>
-            <Form.Item
-              label="Role"
-              name="role"
-              rules={[{ required: true, message: 'Please input your role!' }]}
-            >
-              <Select
-                style={{ width: 120 }}
-                options={[
-                  { value: 'student', label: 'Student' },
-                  { value: 'teacher', label: 'Teacher' },
-                ]}
-              />
-            </Form.Item>
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                { required: true, message: 'Please input your password!' },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
               <Button type="primary" htmlType="submit">
-                Registration
+                Edit
               </Button>
             </Form.Item>
           </Form>
