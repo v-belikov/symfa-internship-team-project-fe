@@ -1,16 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Avatar, Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import { config } from '@core/config';
 import { useAppDispatch, useAppSelector } from '@core/hooks';
 import { toDate } from '@core/utils';
-import { useGetAvatarsQuery, useUpdateUserMutation } from '@store/users';
+import {
+  useGetAvatarsQuery,
+  useRemoveUserMutation,
+  useUpdateUserMutation,
+} from '@store/users';
 import { setUser } from '@store/users/models/auth-slice';
 
 export const UpdateUser: React.FC = () => {
+  const navigate = useNavigate();
   const [updateUser] = useUpdateUserMutation();
   const [form] = Form.useForm();
-  // const selectedtoken = useAppSelector(state => state.user.token);
-  // const { data: loggedUser } = useGetCurrentUserQuery({ selectedtoken });
+
   const selectedUser = useAppSelector(state => state.user.user);
 
   const dispatch = useAppDispatch();
@@ -32,15 +37,22 @@ export const UpdateUser: React.FC = () => {
       values.age -= 1;
     }
 
-    console.log('finished:', values);
     console.log(selectedUser);
 
     await updateUser({ id: selectedUser?.id, data: values });
     dispatch(setUser(values));
+    navigate('/client');
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
+  };
+
+  const [removedUser] = useRemoveUserMutation();
+
+  const removeUser = async () => {
+    await removedUser({ id: selectedUser?.id });
+    navigate('/auth');
   };
 
   const { data: avatars } = useGetAvatarsQuery({});
@@ -51,13 +63,12 @@ export const UpdateUser: React.FC = () => {
 
   return (
     <div>
-      <Button>Back</Button>
       <Space direction="vertical" size={16}>
         <Card title="Profile editing" className="registration__card">
           <Form
             initialValues={{
               ...selectedUser,
-              avatarId: selectedUser?.avatar.id,
+              avatarId: selectedUser?.avatar?.id,
               dateOfBirth: selectedUser?.dateOfBirth
                 ? toDate(selectedUser.dateOfBirth)
                 : undefined,
@@ -139,6 +150,11 @@ export const UpdateUser: React.FC = () => {
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
               <Button type="primary" htmlType="submit">
                 Edit
+              </Button>
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button type="primary" onClick={() => removeUser()}>
+                Remove profile
               </Button>
             </Form.Item>
           </Form>
