@@ -7,17 +7,17 @@ export const authApi = createApi({
     createUser: builder.mutation({
       query(data) {
         return {
-          url: 'register',
+          url: `register`,
           method: 'POST',
           body: data,
         };
       },
     }),
     updateUser: builder.mutation({
-      query(data) {
+      query({ id, data }) {
         return {
-          url: 'update',
-          method: 'PUT',
+          url: `update/${id}`,
+          method: 'PATCH',
           body: data,
         };
       },
@@ -30,6 +30,31 @@ export const authApi = createApi({
         };
       },
     }),
+    loginUser: builder.mutation({
+      query(data) {
+        return {
+          url: `auth/user/login`,
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
+    getCurrentUser: builder.query({
+      query: () => {
+        return {
+          url: `auth/profile`,
+          method: 'GET',
+        };
+      },
+    }),
+    getAllUsers: builder.query({
+      query: () => {
+        return {
+          url: `auth/users`,
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
@@ -37,4 +62,7 @@ export const {
   useCreateUserMutation,
   useUpdateUserMutation,
   useGetAvatarsQuery,
+  useLoginUserMutation,
+  useGetCurrentUserQuery,
+  useGetAllUsersQuery,
 } = authApi;

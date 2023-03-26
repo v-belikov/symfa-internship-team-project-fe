@@ -1,12 +1,20 @@
 import React from 'react';
 import { Avatar, Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import { config } from '@core/config';
-import { useGetAvatarsQuery, useUpdateUserMutation } from '@store/users';
+import { useAppDispatch, useAppSelector } from '@core/hooks';
+import {
+  useGetAvatarsQuery,
+  useGetCurrentUserQuery,
+  useUpdateUserMutation,
+} from '@store/users';
+import { setUser } from '@store/users/models/auth-slice';
 
 export const UpdateUser: React.FC = () => {
   const [updateUser] = useUpdateUserMutation();
-
   const [form] = Form.useForm();
+  const selectedtoken = useAppSelector(state => state.user.token);
+  const { data: loggedUser } = useGetCurrentUserQuery({ selectedtoken });
+  const dispatch = useAppDispatch();
 
   const onFinish = async (fieldsValue: any) => {
     const values = {
@@ -27,7 +35,8 @@ export const UpdateUser: React.FC = () => {
 
     console.log('finished:', values);
 
-    await updateUser(values);
+    await updateUser({ id: loggedUser?.userId, data: values });
+    dispatch(setUser(values));
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -46,6 +55,10 @@ export const UpdateUser: React.FC = () => {
       <Space direction="vertical" size={16}>
         <Card title="Profile editing" className="registration__card">
           <Form
+            initialValues={{
+              name: `${loggedUser?.name}`,
+              email: `${loggedUser?.email}`,
+            }}
             form={form}
             className="registration__card__form"
             name="basic"
