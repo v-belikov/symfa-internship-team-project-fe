@@ -1,15 +1,28 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productsApi } from './products';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { userReducer } from './users/models/auth-slice';
+import { authApi } from './users';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
-    [productsApi.reducerPath]: productsApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
+    user: persistedReducer,
   },
   middleware: getDefaultMiddleware => [
-    ...getDefaultMiddleware(),
-    productsApi.middleware,
+    ...getDefaultMiddleware({ serializableCheck: false }),
+    authApi.middleware,
   ],
 });
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
