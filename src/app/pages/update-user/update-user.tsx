@@ -2,18 +2,17 @@ import React from 'react';
 import { Avatar, Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import { config } from '@core/config';
 import { useAppDispatch, useAppSelector } from '@core/hooks';
-import {
-  useGetAvatarsQuery,
-  useGetCurrentUserQuery,
-  useUpdateUserMutation,
-} from '@store/users';
+import { toDate } from '@core/utils';
+import { useGetAvatarsQuery, useUpdateUserMutation } from '@store/users';
 import { setUser } from '@store/users/models/auth-slice';
 
 export const UpdateUser: React.FC = () => {
   const [updateUser] = useUpdateUserMutation();
   const [form] = Form.useForm();
-  const selectedtoken = useAppSelector(state => state.user.token);
-  const { data: loggedUser } = useGetCurrentUserQuery({ selectedtoken });
+  // const selectedtoken = useAppSelector(state => state.user.token);
+  // const { data: loggedUser } = useGetCurrentUserQuery({ selectedtoken });
+  const selectedUser = useAppSelector(state => state.user.user);
+
   const dispatch = useAppDispatch();
 
   const onFinish = async (fieldsValue: any) => {
@@ -34,8 +33,9 @@ export const UpdateUser: React.FC = () => {
     }
 
     console.log('finished:', values);
+    console.log(selectedUser);
 
-    await updateUser({ id: loggedUser?.userId, data: values });
+    await updateUser({ id: selectedUser?.id, data: values });
     dispatch(setUser(values));
   };
 
@@ -56,8 +56,11 @@ export const UpdateUser: React.FC = () => {
         <Card title="Profile editing" className="registration__card">
           <Form
             initialValues={{
-              name: `${loggedUser?.name}`,
-              email: `${loggedUser?.email}`,
+              ...selectedUser,
+              avatarId: selectedUser?.avatar.id,
+              dateOfBirth: selectedUser?.dateOfBirth
+                ? toDate(selectedUser.dateOfBirth)
+                : undefined,
             }}
             form={form}
             className="registration__card__form"

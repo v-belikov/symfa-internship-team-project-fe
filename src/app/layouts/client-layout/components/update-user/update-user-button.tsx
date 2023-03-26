@@ -4,20 +4,19 @@ import { DownOutlined } from '@ant-design/icons';
 import { Avatar, Button, Popover, Space } from 'antd';
 import { config } from '@core/config';
 import { useAppDispatch, useAppSelector } from '@core/hooks';
-import { useGetCurrentUserQuery } from '@store/users';
 import { logout } from '@store/users/models/auth-slice';
 
 import './styles.scss';
 
 export const UpdateUserButton: React.FC = () => {
   const navigate = useNavigate();
-  const selectedtoken = useAppSelector(state => state.user.token);
-  const { data: loggedUser } = useGetCurrentUserQuery({ selectedtoken });
+
+  const selectedUser = useAppSelector(state => state.user.user);
 
   const dispatch = useAppDispatch();
 
   const updateUser = () => {
-    console.log(loggedUser);
+    console.log(selectedUser);
     navigate('/auth/update');
   };
 
@@ -33,12 +32,12 @@ export const UpdateUserButton: React.FC = () => {
         size={64}
         src={
           <img
-            src={`${config.API_URL}${loggedUser?.avatarPath}`}
+            src={`${config.API_URL}${selectedUser?.avatar.avatarPath}`}
             alt="avatar"
           />
         }
       />
-      <span>{loggedUser?.name}</span>
+      <span>{selectedUser?.name}</span>
       <Popover
         placement="topRight"
         content={
