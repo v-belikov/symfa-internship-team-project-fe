@@ -4,10 +4,11 @@
   background-color: $main-layout-background-color;
 
   &-menu {
-    height: 100vh;
+    min-height: 100vh;
   }
 
   &-wrapper {
+
     .header {
       padding: 0;
       margin: 20px;

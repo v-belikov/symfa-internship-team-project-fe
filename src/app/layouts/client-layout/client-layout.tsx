@@ -1,8 +1,9 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import { Content, Header } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
-import { CoursesBlock } from '@pages/courses-block';
+import { UpdateUserButton } from './components/update-user';
 
 import './styles.scss';
 
@@ -14,10 +15,12 @@ export const ClientLayout: React.FC = () => {
       </Sider>
 
       <Layout className="client-layout-wrapper">
-        <Header className="header" />
+        <Header className="header">
+          <UpdateUserButton />
+        </Header>
         <Layout className="content">
           <Content>
-            <CoursesBlock />
+            <Outlet />
           </Content>
         </Layout>
       </Layout>
