@@ -50,6 +50,7 @@ module.exports = {
     ],
     'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-unused-expressions': [2, { allowTernary: true }],
+    'jsx-a11y/media-has-caption': 0,
     'react/require-default-props': 0, // FIXME: for ref
     'react/no-unused-prop-types': 0, // FIXME: for ref
     'react/no-unstable-nested-components': 0, // FIXME: for ref

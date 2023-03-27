@@ -6,6 +6,7 @@
   &__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     &__img {
       width: 42px;
@@ -47,6 +48,7 @@
     &__lessons {
       display: flex;
       flex-direction: row;
+      align-items: center;
       gap: 10px;
 
       &__count,

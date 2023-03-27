@@ -11,19 +11,35 @@
     row-gap: 20px;
   }
 
-  &__btn-block {
-    & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
-      color: $components-white;
-      background: $components-courses-btn-green-btn;
-      border-color: $components-courses-btn-green-btn;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &__btn-block {
+      & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+        color: $components-white;
+        background: $components-courses-btn-green-btn;
+        border-color: $components-courses-btn-green-btn;
+      }
+
+      & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+        background-color: $components-courses-btn-green-btn;
+      }
+
+      & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper {
+        color: $components-courses-btn-gray-btn;
+      }
     }
 
-    & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
-      background-color: $components-courses-btn-green-btn;
-    }
+    .filter-sort-wrapper {
+      display: flex;
+      gap: 10px;
+      margin-right: 20px;
 
-    & :where(.css-dev-only-do-not-override-ph9edi).ant-radio-button-wrapper {
-      color: $components-courses-btn-gray-btn;
+      &__clear-btn {
+        background-color: $filter-sort-btn-background-color;
+        color: $components-courses-btn-gray-btn;
+      }
     }
   }
 }
