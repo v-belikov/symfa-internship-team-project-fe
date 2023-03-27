@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AppstoreOutlined, MenuOutlined } from '@ant-design/icons';
 import { Button, Col, MenuProps, Radio, Row } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
+import filter from 'assets/images/filter.svg';
+import sort from 'assets/images/sort.svg';
 import {
-  Filter,
+  FilterSort,
   Loader,
   ProfileCard,
   ProfileCardList,
-  Sort,
 } from '@components/ui-kit';
 import { config } from '@core/config';
 import { useGetCoursesQuery } from '@store/courses';
@@ -190,7 +191,8 @@ export const CoursesBlock: React.FC<any> = () => {
           </Radio.Button>
         </Radio.Group>
         <div className="filter-sort-wrapper">
-          <Sort items={sortList} /> <Filter items={teachersList()} />{' '}
+          <FilterSort title="Sort" logo={sort} items={sortList} />{' '}
+          <FilterSort title="Filter" logo={filter} items={teachersList()} />{' '}
           <Button
             className="filter-sort-wrapper__clear-btn"
             onClick={() => clear()}

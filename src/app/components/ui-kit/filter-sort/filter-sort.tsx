@@ -1,15 +1,11 @@
 import React from 'react';
 import { Button, Dropdown } from 'antd';
-import filter from 'assets/images/filter.svg';
 
-import './style.scss';
-
-export const Filter: React.FC<any> = ({ items }) => {
+export const FilterSort: React.FC<any> = ({ items, title, logo }) => {
   return (
     <Dropdown className="filter-sort" menu={{ items }} placement="bottom">
       <Button>
-        {' '}
-        Filter <img src={filter} alt="filter" />
+        {title} <img src={logo} alt="sort" />
       </Button>
     </Dropdown>
   );
