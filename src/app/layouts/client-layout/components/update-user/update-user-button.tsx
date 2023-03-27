@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { DownOutlined } from '@ant-design/icons';
 import { Avatar, Button, Popover, Space } from 'antd';
 import { config } from '@core/config';
@@ -16,13 +17,11 @@ export const UpdateUserButton: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const updateUser = () => {
-    console.log(selectedUser);
     navigate('/auth/update');
   };
 
   const logoutUser = () => {
     dispatch(logout() as any);
-    console.log('logout');
     navigate('/auth');
   };
 
@@ -32,7 +31,7 @@ export const UpdateUserButton: React.FC = () => {
         size={64}
         src={
           <img
-            src={`${config.API_URL}${selectedUser?.avatar.avatarPath}`}
+            src={`${config.API_URL}${selectedUser?.avatar?.avatarPath}`}
             alt="avatar"
           />
         }
