@@ -4,7 +4,7 @@ export interface IUserRequest {
   surname: string;
   email: string;
   phoneNumber: string;
-  discription: string;
+  description: string;
   age: number;
   dateOfBirth: string;
   address: string;
