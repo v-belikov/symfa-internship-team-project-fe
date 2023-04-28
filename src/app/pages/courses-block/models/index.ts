@@ -1,1 +1,2 @@
-export * from './mock-data.constant';
+export * from './course.interface';
+export * from './lessons-modal-props.interface';

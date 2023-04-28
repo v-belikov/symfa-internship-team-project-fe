@@ -1,20 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, Checkbox, Form, Input } from 'antd';
+import { Button, Card, Form, Input } from 'antd';
 import { Loader } from '@components/ui-kit';
-import { useLoginUserMutation } from '@store/users';
-import { setUser } from '@store/users/models/auth-slice';
+import { useGetCurrentUserQuery, useLoginUserMutation } from '@store/users';
+import { setToken, setUser } from '@store/users/models/auth-slice';
 import { useAppDispatch } from '../../core/hooks/use-app-dispatch';
 
 import './styles.scss';
-
-const onFinish = (values: any) => {
-  console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
-};
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -36,23 +28,30 @@ export const Login: React.FC = () => {
   const redirect = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [loginUser, { data, isLoading, isSuccess }] = useLoginUserMutation();
+  // возвращает токен если юзер есть и данные верные
+  const [loginUser, { data: loggedUser, isLoading, isSuccess }] =
+    useLoginUserMutation();
 
-  const loginHandler = async () => {
+  // возращает объект юзер со всеми значениями по токену
+  const { data: allLoggedUser } = useGetCurrentUserQuery(loggedUser?.token);
+
+  const onFinish = async () => {
     if (email && password) {
       await loginUser({ email, password });
-      console.log(`login : ${email} ${password}`);
+      dispatch(setUser(allLoggedUser.user));
     } else {
       alert('login of password is empty');
     }
   };
 
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setUser(data.token));
+      dispatch(setToken(loggedUser.token));
       redirect('/client');
-      console.log('successful login');
-      console.log(`token${data.token}`);
     }
   }, [isSuccess]);
 
@@ -91,18 +90,11 @@ export const Login: React.FC = () => {
               >
                 <Input.Password onChange={onPasswordChange} />
               </Form.Item>
-              <Form.Item
-                name="remember"
-                valuePropName="checked"
-                wrapperCol={{ offset: 8, span: 16 }}
-              >
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                 <Button
-                  onClick={() => {
-                    loginHandler();
-                  }}
+                  // onClick={() => {
+                  //   loginHandler();
+                  // }}
                   type="primary"
                   htmlType="submit"
                 >

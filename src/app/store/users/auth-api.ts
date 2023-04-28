@@ -7,17 +7,17 @@ export const authApi = createApi({
     createUser: builder.mutation({
       query(data) {
         return {
-          url: 'register',
+          url: `register`,
           method: 'POST',
           body: data,
         };
       },
     }),
     updateUser: builder.mutation({
-      query(data) {
+      query({ id, data }) {
         return {
-          url: 'update',
-          method: 'PUT',
+          url: `update/${id}`,
+          method: 'PATCH',
           body: data,
         };
       },
@@ -32,10 +32,8 @@ export const authApi = createApi({
     }),
     loginUser: builder.mutation({
       query(data) {
-        console.log('login', { data });
-
         return {
-          url: 'auth/user/login',
+          url: `auth/user/login`,
           method: 'POST',
           body: data,
         };
@@ -44,7 +42,7 @@ export const authApi = createApi({
     getCurrentUser: builder.query({
       query: () => {
         return {
-          url: `user`,
+          url: `auth/profile`,
           method: 'GET',
         };
       },
@@ -54,6 +52,14 @@ export const authApi = createApi({
         return {
           url: `auth/users`,
           method: 'GET',
+        };
+      },
+    }),
+    removeUser: builder.mutation({
+      query({ id }) {
+        return {
+          url: `auth/remove/${id}`,
+          method: 'DELETE',
         };
       },
     }),
@@ -67,4 +73,5 @@ export const {
   useLoginUserMutation,
   useGetCurrentUserQuery,
   useGetAllUsersQuery,
+  useRemoveUserMutation,
 } = authApi;

@@ -4,3 +4,4 @@ export * from './info-card';
 export * from './profile-card';
 export * from './inform-table';
 export * from './statistic-card';
+export * from './filter-sort';

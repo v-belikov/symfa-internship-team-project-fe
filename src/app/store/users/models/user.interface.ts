@@ -1,12 +1,19 @@
 export interface IUserRequest {
+  id: string;
   name: string;
   surname: string;
   email: string;
   phoneNumber: string;
-  discription: string;
+  description: string;
   age: number;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   address: string;
+  avatar: IAvatar;
+}
+
+export interface IAvatar {
+  id: string;
+  avatarPath: string;
 }
 
 export interface IUserResponse {
