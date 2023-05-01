@@ -1,7 +1,10 @@
 @import 'src/styles/theme/index.scss';
 
 .client-layout {
-  background-color: $main-layout-background-color;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  // background-color: $main-layout-background-color;
 
   &-menu {
     min-height: 100vh;

@@ -1,22 +1,29 @@
 @import 'src/styles/theme/index.scss';
 
-.education-btn-block {
-  margin-bottom: 10px;
+.menu-btn-block {
+  display: flex;
+  flex-direction: column;
 
-  &__menu {
-    width: 250px;
+  .education-btn-block {
+    margin: 5px 10px;
+    width: 60px;
 
-    &:where(.css-dev-only-do-not-override-ph9edi).ant-switch.ant-switch-checked {
-      background: $components-courses-process-purple;
-    }
+    &__menu {
+      flex: 2;
+      width: 250px;
 
-    &:where(.css-dev-only-do-not-override-ph9edi).ant-menu-dark .ant-menu-item-selected {
-      background-color: $components-courses-process-purple;
-    }
+      &:where(.css-dev-only-do-not-override-ph9edi).ant-switch.ant-switch-checked {
+        background: $components-courses-process-purple;
+      }
 
-    &:where(.css-dev-only-do-not-override-ph9edi).ant-menu-light .ant-menu-item-selected {
-      background-color: $components-courses-process-purple;
-      color: $components-white;
+      &:where(.css-dev-only-do-not-override-ph9edi).ant-menu-dark .ant-menu-item-selected {
+        background-color: $components-courses-process-purple;
+      }
+
+      &:where(.css-dev-only-do-not-override-ph9edi).ant-menu-light .ant-menu-item-selected {
+        background-color: $components-courses-process-purple;
+        color: $components-white;
+      }
     }
   }
 }
