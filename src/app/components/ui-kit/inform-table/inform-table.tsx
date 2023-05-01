@@ -15,9 +15,13 @@ export interface InformTableType {
   email: string;
 }
 
-export const InformTable: React.FC<any> = ({ data }) => (
-  <div className="inform-table">
-    <Divider>Middle size table</Divider>
-    <Table columns={COLUMNS} dataSource={data} size="middle" />
-  </div>
-);
+export const InformTable: React.FC<any> = ({ data }) => {
+  console.log(data);
+
+  return (
+    <div className="inform-table">
+      <Divider>Middle size table</Divider>
+      <Table columns={COLUMNS} dataSource={data} size="middle" />
+    </div>
+  );
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   EllipsisOutlined,
   FilterOutlined,
@@ -6,11 +6,26 @@ import {
 } from '@ant-design/icons';
 import { Button, Radio, Tooltip } from 'antd';
 import { InformTable } from '@components/ui-kit';
-import { MOCK_DATA } from './models';
+import { useGetStudentsQuery, useGetTeachersQuery } from '@store/database';
 
+// import { MOCK_DATA } from './models';
 import './styles.scss';
 
 export const DatabaseTableBlock: React.FC = () => {
+  const { data: students } = useGetStudentsQuery('database');
+  const { data: teachers } = useGetTeachersQuery('database');
+  const [users, setUsers] = useState();
+
+  console.log(users);
+
+  const getTeachers = () => {
+    setUsers(teachers);
+  };
+
+  const getStudents = () => {
+    setUsers(students);
+  };
+
   return (
     <div className="database-table-block">
       <div className="database-table-block__header">
@@ -26,8 +41,12 @@ export const DatabaseTableBlock: React.FC = () => {
       </div>
       <div className="database-table-block__btn-block">
         <Radio.Group className="database-table-block__btn-block__radio">
-          <Radio.Button value="student">Student</Radio.Button>
-          <Radio.Button value="teacher">Teacher</Radio.Button>
+          <Radio.Button onClick={getStudents} value="student">
+            Student
+          </Radio.Button>
+          <Radio.Button onClick={getTeachers} value="teacher">
+            Teacher
+          </Radio.Button>
         </Radio.Group>
         <Tooltip
           className="database-table__btn-block-block__right"
@@ -37,7 +56,8 @@ export const DatabaseTableBlock: React.FC = () => {
         </Tooltip>
       </div>
 
-      <InformTable data={MOCK_DATA} />
+      {/* <InformTable data={MOCK_DATA} /> */}
+      <InformTable data={users} />
     </div>
   );
 };

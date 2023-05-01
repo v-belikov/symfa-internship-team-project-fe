@@ -12,7 +12,7 @@ export const COLUMNS: ColumnsType<InformTableType> = [
   },
   {
     title: 'ID',
-    dataIndex: 'id',
+    dataIndex: 'userId',
   },
   {
     title: 'Class',
