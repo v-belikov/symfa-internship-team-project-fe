@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   EllipsisOutlined,
   FilterOutlined,
@@ -12,11 +12,9 @@ import { useGetStudentsQuery, useGetTeachersQuery } from '@store/database';
 import './styles.scss';
 
 export const DatabaseTableBlock: React.FC = () => {
-  const { data: students } = useGetStudentsQuery('database');
+  const { data: students, isSuccess } = useGetStudentsQuery('database');
   const { data: teachers } = useGetTeachersQuery('database');
-  const [users, setUsers] = useState();
-
-  console.log(users);
+  const [users, setUsers] = useState(null);
 
   const getTeachers = () => {
     setUsers(teachers);
@@ -25,6 +23,10 @@ export const DatabaseTableBlock: React.FC = () => {
   const getStudents = () => {
     setUsers(students);
   };
+
+  useEffect(() => {
+    setUsers(students);
+  }, [isSuccess]);
 
   return (
     <div className="database-table-block">

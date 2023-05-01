@@ -8,7 +8,7 @@ export interface InformTableType {
   key: React.Key;
   name: string;
   photo: any;
-  id: string;
+  userId: string;
   class: string;
   gender: string;
   age: number;

@@ -5,7 +5,7 @@ import { InformTableType } from '@components/ui-kit';
 export const MOCK_DATA: InformTableType[] = [
   {
     key: '1',
-    id: '1',
+    userId: '1',
     photo: <UserOutlined />,
     name: 'John Brown',
     age: 32,
@@ -15,7 +15,7 @@ export const MOCK_DATA: InformTableType[] = [
   },
   {
     key: '2',
-    id: '2',
+    userId: '2',
     photo: <UserOutlined />,
     name: 'Jim Green',
     age: 42,
@@ -25,7 +25,7 @@ export const MOCK_DATA: InformTableType[] = [
   },
   {
     key: '3',
-    id: '3',
+    userId: '3',
     photo: <UserOutlined />,
     name: 'Joe Black',
     age: 32,
