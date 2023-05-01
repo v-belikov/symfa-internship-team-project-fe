@@ -3,11 +3,10 @@
 .client-layout {
   display: flex;
   flex-direction: row;
-  height: 100vh;
-  // background-color: $main-layout-background-color;
+  min-height: 100vh;
 
   &-menu {
-    min-height: 100vh;
+    height: 100%;
   }
 
   &-wrapper {
