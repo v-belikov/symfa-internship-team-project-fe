@@ -5,6 +5,7 @@ import { Loader } from '@components/ui-kit';
 import { useGetCurrentUserQuery, useLoginUserMutation } from '@store/users';
 import { setToken, setUser } from '@store/users/models/auth-slice';
 import { useAppDispatch } from '../../core/hooks/use-app-dispatch';
+import { EmailModal } from './components/restore-password-email';
 
 import './styles.scss';
 
@@ -55,6 +56,12 @@ export const Login: React.FC = () => {
     }
   }, [isSuccess]);
 
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+
+  const showEmailModal = () => {
+    setIsEmailModalOpen(true);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -90,6 +97,11 @@ export const Login: React.FC = () => {
               >
                 <Input.Password onChange={onPasswordChange} />
               </Form.Item>
+              <Form.Item>
+                <span className="login__form-forgot" onClick={showEmailModal}>
+                  Forgot password
+                </span>
+              </Form.Item>
               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                 <Button
                   // onClick={() => {
@@ -103,6 +115,11 @@ export const Login: React.FC = () => {
               </Form.Item>
             </Form>
           </Card>
+
+          <EmailModal
+            isEmailModalOpen={isEmailModalOpen}
+            setIsEmailModalOpen={setIsEmailModalOpen}
+          />
         </div>
       )}
     </>

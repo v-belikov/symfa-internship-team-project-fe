@@ -1,9 +1,15 @@
 .login {
   &__card {
-    width: 600px;
-
     &__form {
-      max-width: 600px;
+      width: 500px;
     }
+  }
+
+  &__form-forgot {
+    display: flex;
+    justify-content: end;
+    width: 500px;
+    color: #1677ff;
+    cursor: pointer;
   }
 }
