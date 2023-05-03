@@ -5,11 +5,6 @@ export interface ILesson {
   materialPath: string;
 }
 
-interface ILogo {
-  id: string;
-  logoPath: string;
-}
-
 interface IAvatar {
   id: string;
   avatarPath: string;
@@ -28,6 +23,6 @@ export interface ICourse {
   title: string;
   description: string;
   lessons: Array<ILesson>;
-  logo: ILogo;
+  logo: string;
   teacher: ITeacher;
 }

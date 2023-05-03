@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AppstoreOutlined, MenuOutlined } from '@ant-design/icons';
 import { Button, Col, MenuProps, Radio, Row } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import filter from 'assets/images/filter.svg';
-import sort from 'assets/images/sort.svg';
+import FilterLogo from 'assets/images/filter.svg';
+import SortLogo from 'assets/images/sort.svg';
 import {
   FilterSort,
   Loader,
@@ -11,7 +11,7 @@ import {
   ProfileCardList,
 } from '@components/ui-kit';
 import { config } from '@core/config';
-import { useGetCoursesQuery } from '@store/courses';
+import { useGetCoursesQuery, useGetTeachersQuery } from '@store/courses';
 import { LessonsModal } from './components';
 import { ICourse, ILesson } from './models';
 
@@ -22,55 +22,28 @@ export const CoursesBlock: React.FC<any> = () => {
   const [switchView, setSwitchView] = useState<boolean>(false);
   const [isVisible, setVisible] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<ILesson | null>(null);
-  const { data = [], isLoading } = useGetCoursesQuery(null);
-  const [filtered, setFiltered] = useState(data);
-  const [sorted, setSorted] = useState(data);
-  const [activeAction, setActiveAction] = useState<string>('');
+  const [filter, setFilter] = useState<string>('');
+  // const [sorted, setSorted] = useState<string>('');
+
+  const { data: teachers } = useGetTeachersQuery({});
 
   const clear = () => {
-    setFiltered(data);
-    setSorted(data);
+    setFilter('');
   };
 
-  useEffect(() => {
-    clear();
-  }, [data]);
-
-  const sortedList = (filteredList: Array<ICourse>) => {
-    setSorted(
-      [...filteredList].sort((x: ICourse, y: ICourse) =>
-        x.title.localeCompare(y.title),
-      ),
-    );
-    setActiveAction('sorted');
+  const onChangeFilter = (activeFilter: string) => {
+    setFilter(activeFilter);
   };
 
-  const courseFilter = (trigger: string): void => {
-    if (!trigger) {
-      setFiltered(data);
-    } else {
-      const newData = data.filter(
-        (item: ICourse) =>
-          `${item.teacher.name} ${item.teacher.surname}` === trigger,
-      );
-
-      if (activeAction === 'sorted') {
-        sortedList(newData);
-      } else {
-        setActiveAction('filtered');
-      }
-
-      setFiltered(newData);
-    }
-  };
+  const { data: courses, isLoading } = useGetCoursesQuery({
+    teacher: filter,
+  });
 
   const teachersList = (): MenuProps['items'] => {
-    return data.map((item: ICourse, index: number) => {
-      const fullName = `${item.teacher.name} ${item.teacher.surname}`;
-
+    return teachers?.map((item: string, index: number) => {
       return {
         key: index,
-        label: <div onClick={() => courseFilter(fullName)}> {fullName}</div>,
+        label: <div onClick={() => onChangeFilter(item)}> {item}</div>,
       };
     });
   };
@@ -78,15 +51,13 @@ export const CoursesBlock: React.FC<any> = () => {
   const sortList: MenuProps['items'] = [
     {
       key: '1',
-      label: <div onClick={() => sortedList(filtered)}>Course name</div>,
+      label: <div>Course name</div>,
     },
   ];
 
   const hoursCalculation = (lessons: Array<ILesson>): number => {
     return lessons.reduce((acc: number, cur: ILesson) => {
-      const hours = acc + cur.duration;
-
-      return hours;
+      return acc + cur.duration;
     }, 0);
   };
 
@@ -135,7 +106,7 @@ export const CoursesBlock: React.FC<any> = () => {
         name: `${item.teacher.name} ${item.teacher.surname}`,
         avatar: `${config.API_URL}/${item.teacher.avatar.avatarPath}`,
         subject: item.title,
-        icon: `${config.API_URL}/${item.logo.logoPath}`,
+        icon: `${config.API_URL}/${item.logo}`,
         lesson: item.lessons.length,
         hour: hoursCalculation(item.lessons),
         content: dropDownContent(item.lessons),
@@ -152,17 +123,6 @@ export const CoursesBlock: React.FC<any> = () => {
         </Col>
       );
     });
-  };
-
-  const filteredSortedList = () => {
-    switch (activeAction) {
-      case 'filtered':
-        return createProfileCard(filtered);
-      case 'sorted':
-        return createProfileCard(sorted);
-      default:
-        return createProfileCard(data);
-    }
   };
 
   if (isLoading) {
@@ -191,8 +151,8 @@ export const CoursesBlock: React.FC<any> = () => {
           </Radio.Button>
         </Radio.Group>
         <div className="filter-sort-wrapper">
-          <FilterSort title="Sort" logo={sort} items={sortList} />{' '}
-          <FilterSort title="Filter" logo={filter} items={teachersList()} />{' '}
+          <FilterSort title="Sort" logo={SortLogo} items={sortList} />{' '}
+          <FilterSort title="Filter" logo={FilterLogo} items={teachersList()} />{' '}
           <Button
             className="filter-sort-wrapper__clear-btn"
             onClick={() => clear()}
@@ -202,7 +162,7 @@ export const CoursesBlock: React.FC<any> = () => {
         </div>
       </div>
       <Row gutter={16} className="courses__cards-block">
-        {filteredSortedList()}
+        {createProfileCard(courses)}
       </Row>
     </div>
   );

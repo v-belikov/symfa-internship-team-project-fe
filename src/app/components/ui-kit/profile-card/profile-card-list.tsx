@@ -42,6 +42,7 @@ export const ProfileCardList: React.FC<any> = ({
               className="profile-card__header__img"
               src={avatar}
               alt="icon"
+              loading="lazy"
             />
             <div className="profile-card__avatar-block__name">{name}</div>
           </div>

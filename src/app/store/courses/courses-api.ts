@@ -11,7 +11,15 @@ export const coursesApi = createApi({
         params,
       }),
     }),
+    getTeachers: builder.query({
+      query: () => {
+        return {
+          url: `courses/teachers`,
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetCoursesQuery } = coursesApi;
+export const { useGetCoursesQuery, useGetTeachersQuery } = coursesApi;
