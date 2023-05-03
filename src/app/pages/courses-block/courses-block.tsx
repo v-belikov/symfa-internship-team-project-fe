@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { AppstoreOutlined, MenuOutlined } from '@ant-design/icons';
 import { Button, Col, MenuProps, Radio, Row } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import FilterLogo from 'assets/images/filter.svg';
-import SortLogo from 'assets/images/sort.svg';
+import FilterLogo from 'assets/images/courses/filter.svg';
+import GridLogo from 'assets/images/courses/grid.svg';
+import ListLogo from 'assets/images/courses/list.svg';
+import SortLogo from 'assets/images/courses/sort.svg';
 import {
   FilterSort,
   Loader,
@@ -23,20 +24,26 @@ export const CoursesBlock: React.FC<any> = () => {
   const [isVisible, setVisible] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<ILesson | null>(null);
   const [filter, setFilter] = useState<string>('');
-  // const [sorted, setSorted] = useState<string>('');
+  const [sorted, setSorted] = useState<string>('');
 
   const { data: teachers } = useGetTeachersQuery({});
 
   const clear = () => {
     setFilter('');
+    setSorted('');
   };
 
   const onChangeFilter = (activeFilter: string) => {
     setFilter(activeFilter);
   };
 
+  const onChangeSort = (activeFilter: string) => {
+    setSorted(activeFilter);
+  };
+
   const { data: courses, isLoading } = useGetCoursesQuery({
     teacher: filter,
+    sort: sorted,
   });
 
   const teachersList = (): MenuProps['items'] => {
@@ -51,7 +58,7 @@ export const CoursesBlock: React.FC<any> = () => {
   const sortList: MenuProps['items'] = [
     {
       key: '1',
-      label: <div>Course name</div>,
+      label: <div onClick={() => onChangeSort('name')}>Course name</div>,
     },
   ];
 
@@ -144,10 +151,10 @@ export const CoursesBlock: React.FC<any> = () => {
           onChange={e => onHandleChange(e)}
         >
           <Radio.Button value="small">
-            <AppstoreOutlined />
+            <img src={GridLogo} alt="grid" />
           </Radio.Button>
           <Radio.Button value="large">
-            <MenuOutlined />
+            <img src={ListLogo} alt="list" />
           </Radio.Button>
         </Radio.Group>
         <div className="filter-sort-wrapper">
