@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Button, Col, MenuProps, Radio, RadioChangeEvent, Row } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import FilterLogo from 'assets/images/courses/filter.svg';
@@ -18,7 +18,7 @@ import { ICourse, ILesson } from './models';
 
 import './styles.scss';
 
-export const CoursesBlock: React.FC<any> = () => {
+export const Courses: React.FC<any> = () => {
   const [componentSize, setComponentSize] = useState<SizeType>('small');
   const [switchView, setSwitchView] = useState<boolean>(false);
   const [isVisible, setVisible] = useState<boolean>(false);
@@ -28,16 +28,16 @@ export const CoursesBlock: React.FC<any> = () => {
 
   const { data: teachers } = useGetTeachersQuery({});
 
-  const clear = () => {
+  const clear = (): void => {
     setFilter('');
     setSorted('');
   };
 
-  const onChangeFilter = (activeFilter: string) => {
+  const onChangeFilter = (activeFilter: string): void => {
     setFilter(activeFilter);
   };
 
-  const onChangeSort = (activeSort: string) => {
+  const onChangeSort = (activeSort: string): void => {
     setSorted(activeSort);
   };
 
@@ -68,12 +68,12 @@ export const CoursesBlock: React.FC<any> = () => {
     }, 0);
   };
 
-  const onHandleChange = (e: RadioChangeEvent) => {
+  const onHandleChange = (e: RadioChangeEvent): void => {
     setComponentSize(e.target.value);
     setSwitchView(!switchView);
   };
 
-  const toggleVisibility = useCallback(() => {
+  const toggleVisibility = useCallback((): void => {
     setVisible((prevState: boolean) => !prevState);
   }, []);
 
@@ -93,7 +93,7 @@ export const CoursesBlock: React.FC<any> = () => {
     toggleVisibility();
   };
 
-  const dropDownContent = (lessons: Array<ILesson>) => {
+  const dropDownContent: FC<ILesson[]> = (lessons: Array<ILesson>) => {
     return (
       <div className="lessons-content">
         {lessons.map((item: ILesson) => {
@@ -107,7 +107,7 @@ export const CoursesBlock: React.FC<any> = () => {
     );
   };
 
-  const createProfileCard = (list: Array<ICourse>) => {
+  const createProfileCard = (list: Array<ICourse>): JSX.Element[] => {
     return list.map((item: ICourse) => {
       const props = {
         name: `${item.teacher.name} ${item.teacher.surname}`,

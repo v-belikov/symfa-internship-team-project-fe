@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { ClientLayout } from '@layouts/client-layout';
-import { CoursesBlock } from '@pages/courses-block';
+import { Courses } from '@pages/courses';
 import { DashboardBlock } from '@pages/dashboard-block';
 import { DatabaseTableBlock } from '@pages/database-table-block';
 import { Login } from '@pages/login';
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
     element: <ClientLayout />,
     children: [
       { index: true, element: <DashboardBlock /> },
-      { path: 'courses', element: <CoursesBlock /> },
+      { path: 'courses', element: <Courses /> },
       { path: 'database', element: <DatabaseTableBlock /> },
     ],
   },

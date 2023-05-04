@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { Modal, Typography } from 'antd';
 import { config } from '@core/config';
-import { ILessonsModalProps } from '@pages/courses-block';
+import { ILessonsModalProps } from '@pages/courses';
 
 export const LessonsModal: FC<ILessonsModalProps> = ({
   width = 500,

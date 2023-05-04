@@ -1,4 +1,4 @@
-export * from './courses-block';
+export * from './courses';
 export * from './dashboard-block';
 export * from './database-table-block';
 export * from './profile-block';

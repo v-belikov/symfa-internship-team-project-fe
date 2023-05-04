@@ -1,4 +1,4 @@
-import { ILesson } from '@pages/courses-block';
+import { ILesson } from '@pages/courses';
 
 export interface ILessonComplete {
   lesson: ILesson;
