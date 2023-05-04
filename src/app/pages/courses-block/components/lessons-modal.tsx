@@ -1,14 +1,14 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { Modal, Typography } from 'antd';
 import { config } from '@core/config';
-import { ILessonsModalPropsInterface } from '@pages/courses-block';
+import { ILessonsModalProps } from '@pages/courses-block';
 
-export const LessonsModal: FC<ILessonsModalPropsInterface> = ({
+export const LessonsModal: FC<ILessonsModalProps> = ({
   width = 500,
   centered = true,
   item,
   ...rest
-}: PropsWithChildren<ILessonsModalPropsInterface>) => {
+}: PropsWithChildren<ILessonsModalProps>) => {
   return (
     <Modal title={item?.title} width={width} centered={centered} {...rest}>
       <Typography>Duration: {item?.duration} hour(s)</Typography>
@@ -18,5 +18,3 @@ export const LessonsModal: FC<ILessonsModalPropsInterface> = ({
     </Modal>
   );
 };
-
-export default LessonsModal;
