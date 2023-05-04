@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, Col, MenuProps, Radio, Row } from 'antd';
+import { Button, Col, MenuProps, Radio, RadioChangeEvent, Row } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import FilterLogo from 'assets/images/courses/filter.svg';
 import GridLogo from 'assets/images/courses/grid.svg';
@@ -37,8 +37,8 @@ export const CoursesBlock: React.FC<any> = () => {
     setFilter(activeFilter);
   };
 
-  const onChangeSort = (activeFilter: string) => {
-    setSorted(activeFilter);
+  const onChangeSort = (activeSort: string) => {
+    setSorted(activeSort);
   };
 
   const { data: courses, isLoading } = useGetCoursesQuery({
@@ -68,10 +68,10 @@ export const CoursesBlock: React.FC<any> = () => {
     }, 0);
   };
 
-  function onHandleChange(e: any) {
+  const onHandleChange = (e: RadioChangeEvent) => {
     setComponentSize(e.target.value);
     setSwitchView(!switchView);
-  }
+  };
 
   const toggleVisibility = useCallback(() => {
     setVisible((prevState: boolean) => !prevState);
@@ -148,7 +148,7 @@ export const CoursesBlock: React.FC<any> = () => {
         <Radio.Group
           className="courses__header__btn-block"
           value={componentSize}
-          onChange={e => onHandleChange(e)}
+          onChange={onHandleChange}
         >
           <Radio.Button value="small">
             <img src={GridLogo} alt="grid" />
