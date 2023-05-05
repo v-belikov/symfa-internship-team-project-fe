@@ -4,5 +4,4 @@ export * from './profile-block';
 export * from './years-statistics';
 export * from './login';
 export * from './registration';
-export * from './navigation';
 export * from './database-table';

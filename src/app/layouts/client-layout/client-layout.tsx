@@ -2,8 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
 import { Content, Header } from 'antd/es/layout/layout';
-import { Navigation } from '@pages/navigation/navigation';
-import { UpdateUserButton } from './components/update-user';
+import { Navigation, UpdateUserButton } from './components';
 
 import './styles.scss';
 

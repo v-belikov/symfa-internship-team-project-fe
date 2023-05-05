@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { DownOutlined } from '@ant-design/icons';
 import { Avatar, Button, Popover, Space } from 'antd';
 import { config } from '@core/config';
