@@ -1,14 +1,29 @@
+/* eslint-disable jsx-a11y/alt-text */
+import React from 'react';
+import { Avatar } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { InformTableType } from '../inform-table';
+import { config } from '@core/config';
+import { IAvatar, UserType } from './inform-table.interface';
 
-export const COLUMNS: ColumnsType<InformTableType> = [
+export const COLUMNS: ColumnsType<UserType> = [
   {
     title: '',
-    dataIndex: 'photo',
+    dataIndex: 'avatar',
+    render: (avatar: IAvatar) => {
+      return (
+        <Avatar
+          size={32}
+          src={
+            <img src={`${config.API_URL}/${avatar.avatarPath}`} alt="avatar" />
+          }
+        />
+      );
+    },
   },
   {
     title: 'Name',
-    dataIndex: 'name',
+    dataIndex: '',
+    render: (user: UserType) => <div>{`${user.name} ${user.surname}`}</div>,
   },
   {
     title: 'ID',

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import {
   EllipsisOutlined,
@@ -6,51 +5,39 @@ import {
   OrderedListOutlined,
 } from '@ant-design/icons';
 import { Button, Dropdown, MenuProps, Radio, Tooltip } from 'antd';
-import { InformTable, UserPropsType } from '@components/ui-kit';
+import { InformTable } from '@components/ui-kit';
+import { UserType } from '@components/ui-kit/inform-table/models';
 import { useGetStudentsQuery, useGetTeachersQuery } from '@store/database';
 
 import './styles.scss';
 
-export const DatabaseTableBlock: React.FC = () => {
-  const { data: students, isSuccess } = useGetStudentsQuery('database');
+export const DatabaseTable: React.FC = () => {
+  const { data: students, isSuccess } = useGetStudentsQuery({ data: 'string' });
   const { data: teachers } = useGetTeachersQuery('database');
-  const [users, setUsers] = useState<UserPropsType[]>(students);
-  const [dataForSort, setDataForSort] = useState(users);
+  const [users, setUsers] = useState<UserType[]>([]);
 
-  const sortByName = () => {
-    const SortUsers = [...users].sort((a: UserPropsType, b: UserPropsType) => {
-      return a.name > b.name ? 1 : -1;
-    });
+  useEffect(() => {
+    setUsers(students);
+  }, [isSuccess]);
 
-    setUsers(SortUsers);
+  const sortByName = async () => {
+    console.log('sortByName');
   };
 
   const sortByAge = () => {
-    const SortUsers = [...users].sort((a: UserPropsType, b: UserPropsType) => {
-      return a.age > b.age ? 1 : -1;
-    });
-
-    setUsers(SortUsers);
+    console.log('sortByAge');
   };
 
   const sortByID = () => {
-    const SortUsers = [...users].sort((a: UserPropsType, b: UserPropsType) => {
-      return a.userId > b.userId ? 1 : -1;
-    });
-
-    setUsers(SortUsers);
+    console.log('sortByID');
   };
 
   const filterMale = () => {
-    setUsers(
-      dataForSort.filter(item => item.gender.toLocaleLowerCase() === 'male'),
-    );
+    console.log('filterMale');
   };
 
   const filterFemale = () => {
-    setUsers(
-      dataForSort.filter(item => item.gender.toLowerCase() === 'female'),
-    );
+    console.log('filterFemale');
   };
 
   const sortMenuItems: MenuProps['items'] = [
@@ -107,19 +94,11 @@ export const DatabaseTableBlock: React.FC = () => {
     setUsers(students);
   };
 
-  useEffect(() => {
-    setUsers(students);
-  }, [isSuccess]);
-
-  useEffect(() => {
-    setDataForSort(users);
-  }, []);
-
   return (
-    <div className="database-table-block">
-      <div className="database-table-block__header">
-        <div className="database-table-block__header__title">Database</div>
-        <div className="database-table-block__header__btn-block">
+    <div className="database-table">
+      <div className="database-table__header">
+        <div className="database-table__header__title">Database</div>
+        <div className="database-table__header__btn">
           <Dropdown menu={{ items: sortMenuItems }}>
             <Button>
               Sort
@@ -133,13 +112,13 @@ export const DatabaseTableBlock: React.FC = () => {
               <FilterOutlined />
             </Button>
           </Dropdown>
-          {/* <Button>
-            Filter <FilterOutlined />
-          </Button> */}
         </div>
       </div>
-      <div className="database-table-block__btn-block">
-        <Radio.Group className="database-table-block__btn-block__radio">
+      <div className="database-table__btn-block">
+        <Radio.Group
+          className="database-table__btn-block__radio"
+          defaultValue="student"
+        >
           <Radio.Button onClick={getStudents} value="student">
             Student
           </Radio.Button>
@@ -147,15 +126,12 @@ export const DatabaseTableBlock: React.FC = () => {
             Teacher
           </Radio.Button>
         </Radio.Group>
-        <Tooltip
-          className="database-table__btn-block-block__right"
-          title="search"
-        >
+        <Tooltip className="database-table__btn-block__right" title="search">
           <Button shape="circle" icon={<EllipsisOutlined />} />
         </Tooltip>
       </div>
 
-      <InformTable data={users} />
+      <InformTable users={users} />
     </div>
   );
 };

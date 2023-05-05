@@ -6,10 +6,10 @@ import { MENU_ITEMS } from './models';
 
 import './styles.scss';
 
-export const EducationBtnBlock: React.FC = () => {
+export const Navigation: React.FC = () => {
   const [theme, setTheme] = useState<MenuTheme>('dark');
   const [current, setCurrent] = useState('./');
-  const redirect = useNavigate();
+  const navigate = useNavigate();
 
   const changeTheme = (value: boolean) => {
     setTheme(value ? 'dark' : 'light');
@@ -17,20 +17,20 @@ export const EducationBtnBlock: React.FC = () => {
 
   const onClick: MenuProps['onClick'] = e => {
     setCurrent(e.key);
-    redirect(e.key);
+    navigate(e.key);
   };
 
   return (
-    <div className="menu-btn-block">
+    <div className="navigation-block">
       <Switch
-        className="education-btn-block"
+        className="navigation"
         checked={theme === 'dark'}
         onChange={changeTheme}
         checkedChildren="Dark"
         unCheckedChildren="Light"
       />
       <Menu
-        className="education-btn-block__menu"
+        className="navigation__menu"
         theme={theme}
         onClick={onClick}
         defaultOpenKeys={['sub1']}
