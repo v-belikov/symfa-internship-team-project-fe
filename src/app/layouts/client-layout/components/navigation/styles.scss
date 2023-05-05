@@ -1,0 +1,29 @@
+@import 'src/styles/theme/index.scss';
+
+.navigation-block {
+  display: flex;
+  flex-direction: column;
+
+  .navigation {
+    margin: 5px 10px;
+    width: 60px;
+
+    &__menu {
+      flex: 2;
+      width: 250px;
+
+      &:where(.css-dev-only-do-not-override-ph9edi).ant-switch.ant-switch-checked {
+        background: $components-courses-process-purple;
+      }
+
+      &:where(.css-dev-only-do-not-override-ph9edi).ant-menu-dark .ant-menu-item-selected {
+        background-color: $components-courses-process-purple;
+      }
+
+      &:where(.css-dev-only-do-not-override-ph9edi).ant-menu-light .ant-menu-item-selected {
+        background-color: $components-courses-process-purple;
+        color: $components-white;
+      }
+    }
+  }
+}

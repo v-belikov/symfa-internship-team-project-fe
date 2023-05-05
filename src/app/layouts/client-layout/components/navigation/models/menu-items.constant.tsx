@@ -21,7 +21,7 @@ const getItem = (
 };
 
 export const MENU_ITEMS: MenuItem[] = [
-  getItem('Dashboard', '1', <HomeOutlined />),
-  getItem('Courses', '2', <ReadOutlined />),
-  getItem('Database', '3', <FileOutlined />),
+  getItem('Dashboard', './', <HomeOutlined />),
+  getItem('Courses', './courses', <ReadOutlined />),
+  getItem('Database', './database', <FileOutlined />),
 ];

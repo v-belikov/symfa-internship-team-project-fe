@@ -1,18 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import { Content, Header } from 'antd/es/layout/layout';
-import Sider from 'antd/es/layout/Sider';
-import { UpdateUserButton } from './components/update-user';
+import { Navigation, UpdateUserButton } from './components';
 
 import './styles.scss';
 
 export const ClientLayout: React.FC = () => {
   return (
     <Layout className="client-layout">
-      <Sider>
-        <Menu className="client-layout-menu" />
-      </Sider>
+      <Navigation />
 
       <Layout className="client-layout-wrapper">
         <Header className="header">

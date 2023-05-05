@@ -1,14 +1,15 @@
 @import 'src/styles/theme/index.scss';
 
 .client-layout {
-  background-color: $main-layout-background-color;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
 
   &-menu {
-    min-height: 100vh;
+    height: 100%;
   }
 
   &-wrapper {
-
     .header {
       padding: 0;
       margin: 20px;
