@@ -11,6 +11,7 @@ import {
   Space,
 } from 'antd';
 import { config } from '@core/config';
+import { dateDiff } from '@core/utils';
 import { useCreateUserMutation, useGetAvatarsQuery } from '@store/users';
 
 import './styles.scss';
@@ -27,26 +28,11 @@ export const Registration: React.FC = () => {
       dateOfBirth: fieldsValue.dateOfBirth.format('YYYY-MM-DD'),
     };
 
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const dt = new Date(values.dateOfBirth);
-    const dbnow = new Date(today.getFullYear(), dt.getMonth(), dt.getDate());
+    const age = dateDiff(new Date(), values.dateOfBirth, 'years');
 
-    values.age = today.getFullYear() - dt.getFullYear();
-
-    if (today < dbnow) {
-      values.age -= 1;
-    }
-
-    console.log('finished:', values);
-
-    await createdUser(values);
+    await createdUser({ ...values, age });
 
     navigate('/auth');
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   const onAvatarClick = (avatar: any) => {
@@ -66,7 +52,6 @@ export const Registration: React.FC = () => {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
