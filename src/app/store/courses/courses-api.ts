@@ -1,17 +1,17 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { BASE_QUERY } from '../models';
 
-export const productsApi = createApi({
-  reducerPath: 'products',
+export const coursesApi = createApi({
+  reducerPath: 'courses',
   baseQuery: BASE_QUERY,
   endpoints: builder => ({
-    getProducts: builder.query({
+    getCourses: builder.query({
       query: params => ({
-        url: 'products',
+        url: 'courses/all',
         params,
       }),
     }),
   }),
 });
 
-export const { useGetProductsQuery } = productsApi;
+export const { useGetCoursesQuery } = coursesApi;

@@ -4,11 +4,10 @@
   background-color: $main-layout-background-color;
 
   &-menu {
-    height: 100vh;
+    min-height: 100vh;
   }
 
   &-wrapper {
-    margin-left: 20px;
 
     .header {
       padding: 0;
@@ -18,7 +17,6 @@
 
     .content {
       margin: 20px;
-      background-color: $components-background-color;
     }
   }
 }

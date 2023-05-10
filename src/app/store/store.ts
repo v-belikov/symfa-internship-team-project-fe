@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { coursesApi } from '@store/courses';
+import { lessonsReducer } from '@store/lessons';
 import { userReducer } from './users/auth-slice';
 import { passwordApi } from './restore-password';
 import { authApi } from './users';
@@ -17,11 +19,14 @@ export const store = configureStore({
     [passwordApi.reducerPath]: passwordApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     user: persistedReducer,
+    [coursesApi.reducerPath]: coursesApi.reducer,
+    lessons: lessonsReducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({ serializableCheck: false }),
     passwordApi.middleware,
     authApi.middleware,
+    coursesApi.middleware,
   ],
 });
 

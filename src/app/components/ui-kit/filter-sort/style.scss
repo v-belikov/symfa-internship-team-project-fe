@@ -1,0 +1,7 @@
+@import 'src/styles/theme/index.scss';
+
+.filter-sort {
+  width: 100px;
+  background-color: $filter-sort-btn-background-color;
+  color: $components-courses-btn-gray-btn;
+}
