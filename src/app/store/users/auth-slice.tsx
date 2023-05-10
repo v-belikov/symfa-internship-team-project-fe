@@ -1,8 +1,8 @@
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsForRegex": ["^state"] }] */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
-import { authApi } from '../auth-api';
-import { IUserRequest, IUserResponse } from './user.interface';
+import { IUserRequest, IUserResponse } from './models/user.interface';
+import { authApi } from './auth-api';
 
 const initialState: IUserResponse = {
   user: null,
@@ -27,9 +27,8 @@ export const userSlice = createSlice({
 
   extraReducers: builder => {
     builder.addMatcher(
-      authApi.endpoints.loginUser.matchFulfilled,
-      (state, { payload: { token, ...user } }) => {
-        state.token = token;
+      authApi.endpoints.getCurrentUser.matchFulfilled,
+      (state, { payload: { user } }) => {
         state.user = user;
       },
     );

@@ -1,14 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, Form, Input } from 'antd';
+import { Button, Card, Form, Input, message } from 'antd';
 import { Loader } from '@components/ui-kit';
-import { useGetCurrentUserQuery, useLoginUserMutation } from '@store/users';
-import { setToken, setUser } from '@store/users/models/auth-slice';
+import { useGetCurrentUserMutation, useLoginUserMutation } from '@store/users';
+import { setToken } from '@store/users/auth-slice';
 import { useAppDispatch } from '../../core/hooks/use-app-dispatch';
+import { EmailModal } from './components/restore-password-email';
 
 import './styles.scss';
 
 export const Login: React.FC = () => {
+  const redirect = useNavigate();
+  const dispatch = useAppDispatch();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -25,35 +29,48 @@ export const Login: React.FC = () => {
     },
     [],
   );
-  const redirect = useNavigate();
-  const dispatch = useAppDispatch();
 
   // возвращает токен если юзер есть и данные верные
   const [loginUser, { data: loggedUser, isLoading, isSuccess }] =
     useLoginUserMutation();
 
   // возращает объект юзер со всеми значениями по токену
-  const { data: allLoggedUser } = useGetCurrentUserQuery(loggedUser?.token);
+  // const { data: allLoggedUser } = useGetCurrentUserQuery(loggedUser?.token);
+  const [getCurrent, { isSuccess: isGetCurrentUserSuccess }] =
+    useGetCurrentUserMutation();
 
   const onFinish = async () => {
     if (email && password) {
       await loginUser({ email, password });
-      dispatch(setUser(allLoggedUser.user));
+      await getCurrent({});
+
+      // dispatch(setUser(allLoggedUser.user));
     } else {
-      alert('login of password is empty');
+      message.info('login or password is empty');
     }
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    message.info('Failed', errorInfo);
   };
 
   useEffect(() => {
     if (isSuccess) {
       dispatch(setToken(loggedUser.token));
-      redirect('/client');
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (isGetCurrentUserSuccess) {
+      redirect('/client');
+    }
+  }, [isGetCurrentUserSuccess]);
+
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+
+  const showEmailModal = () => {
+    setIsEmailModalOpen(true);
+  };
 
   return (
     <>
@@ -90,19 +107,23 @@ export const Login: React.FC = () => {
               >
                 <Input.Password onChange={onPasswordChange} />
               </Form.Item>
+              <Form.Item>
+                <span className="login__form-forgot" onClick={showEmailModal}>
+                  Forgot password
+                </span>
+              </Form.Item>
               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button
-                  // onClick={() => {
-                  //   loginHandler();
-                  // }}
-                  type="primary"
-                  htmlType="submit"
-                >
+                <Button type="primary" htmlType="submit">
                   Login
                 </Button>
               </Form.Item>
             </Form>
           </Card>
+
+          <EmailModal
+            isEmailModalOpen={isEmailModalOpen}
+            setIsEmailModalOpen={setIsEmailModalOpen}
+          />
         </div>
       )}
     </>

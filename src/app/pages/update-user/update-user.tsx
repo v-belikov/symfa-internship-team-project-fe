@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Avatar, Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import { config } from '@core/config';
 import { useAppDispatch, useAppSelector } from '@core/hooks';
-import { toDate } from '@core/utils';
+import { dateDiff, toDate } from '@core/utils';
 import {
   useGetAvatarsQuery,
   useRemoveUserMutation,
   useUpdateUserMutation,
 } from '@store/users';
-import { setUser } from '@store/users/models/auth-slice';
+import { setUser } from '@store/users/auth-slice';
 
 export const UpdateUser: React.FC = () => {
   const navigate = useNavigate();
@@ -26,26 +26,13 @@ export const UpdateUser: React.FC = () => {
       dateOfBirth: fieldsValue.dateOfBirth.format('YYYY-MM-DD'),
     };
 
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const dt = new Date(values.dateOfBirth);
-    const dbnow = new Date(today.getFullYear(), dt.getMonth(), dt.getDate());
-
-    values.age = today.getFullYear() - dt.getFullYear();
-
-    if (today < dbnow) {
-      values.age -= 1;
-    }
+    const age = dateDiff(new Date(), values.dateOfBirth, 'years');
 
     console.log(selectedUser);
 
-    await updateUser({ id: selectedUser?.id, data: values });
-    dispatch(setUser(values));
+    await updateUser({ id: selectedUser?.id, data: { ...values, age } });
+    dispatch(setUser({ ...values, age }));
     navigate('/client');
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   const [removedUser] = useRemoveUserMutation();
@@ -79,7 +66,6 @@ export const UpdateUser: React.FC = () => {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item label="Name" name="name" rules={[{ required: false }]}>
